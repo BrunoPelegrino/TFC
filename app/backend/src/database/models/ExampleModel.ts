@@ -4,7 +4,7 @@ import db from '.';
 
 class Example extends Model {
   // declare <campo>: <tipo>;
-}
+} 
 
 Example.init({
   // ... Campos
