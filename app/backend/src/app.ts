@@ -34,4 +34,7 @@ class App {
   }
 }
 
-export default App;
+export { App };
+
+// separa servidor dos testes
+export const { app } = new App();
