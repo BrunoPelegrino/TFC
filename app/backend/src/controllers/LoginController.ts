@@ -18,5 +18,15 @@ class UserController {
       next(error);
     }
   };
+
+  userRole = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { userId } = req.headers;
+      const role = await this.userService.roleById(userId as string);
+      return res.status(200).json({ role });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 export default UserController;

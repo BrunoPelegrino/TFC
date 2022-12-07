@@ -7,7 +7,7 @@ const logindMiddleware = (req: Request, _res: Response, next: NextFunction) => {
   if (!email || !password) {
     throw new ErrorGenerate('All fields must be filled', 400);
   }
-  if (password.length <= 6) {
+  if (password.length < 6) {
     throw new ErrorGenerate('Password must be at least 6', 400);
   }
 

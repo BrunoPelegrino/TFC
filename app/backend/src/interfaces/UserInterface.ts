@@ -3,4 +3,11 @@ interface IUser {
   password: string;
 }
 
-export default IUser;
+interface IUserPayload extends IUser {
+  id: number;
+  role: string;
+}
+
+export { IUser,
+  IUserPayload,
+};

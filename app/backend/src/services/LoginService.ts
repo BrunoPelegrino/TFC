@@ -4,7 +4,7 @@ import checkPassword from '../utils/bcrypt';
 
 import User from '../database/models/UserModel';
 
-import IUser from '../interfaces/UserInterface';
+import { IUser } from '../interfaces/UserInterface';
 import { newToken } from '../auth/newToken';
 
 class LoginService {
@@ -23,9 +23,14 @@ class LoginService {
     /* if (!userLogin.email || !userLogin.password) {
       throw new ErrorGenerate('All fields must be filled', 400);
     } */
-    const { email, password } = userLogin;
-    const token = newToken({ email, password });
+    const { email, password, id, role } = userLogin;
+    const token = newToken({ email, password, id, role });
     return token;
+  }
+
+  public async roleById(userId: string) {
+    const user = await this.userModel.findByPk(userId);
+    return user?.role;
   }
 }
 export default LoginService;

@@ -1,17 +1,15 @@
 import * as jwt from 'jsonwebtoken';
-import IUser from '../interfaces/UserInterface';
+import { IUserPayload } from '../interfaces/UserInterface';
 
 import 'dotenv/config';
 
 const secret = process.env.JWT_SECRET;
 
-const newToken = (user: IUser) => {
+const newToken = (payload: IUserPayload) => {
   const jwtConfig = {
     expiresIn: '7d',
     algorithm: 'HS256',
   };
-
-  const payload = { email: user.email };
 
   const token = jwt.sign(
     payload,
