@@ -7,4 +7,9 @@ interface IMatch {
   inProgress: boolean;
 }
 
-export default IMatch;
+interface IUpdateScore {
+  homeTeamGoals: number,
+  awayTeamGoals: number
+}
+
+export { IUpdateScore, IMatch };

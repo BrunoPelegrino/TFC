@@ -12,5 +12,6 @@ const matchController = new MatchController(matchService);
 matchRouter.get('/', matchController.getMatches);
 matchRouter.post('/', authorizationToken, updateMiddleware, matchController.insertMatches);
 matchRouter.patch('/:id/finish', matchController.updateInProgress);
+matchRouter.patch('/:id', matchController.updateScore);
 
 export default matchRouter;

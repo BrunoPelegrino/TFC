@@ -1,6 +1,6 @@
 import Team from '../database/models/TeamModel';
 import Match from '../database/models/MatchModel';
-import IMatch from '../interfaces/MatchInterface';
+import { IMatch, IUpdateScore } from '../interfaces/MatchInterface';
 
 class MatchService {
   constructor(private matchModel = Match) {}
@@ -42,6 +42,11 @@ class MatchService {
 
   async updateInProgress(id: number) {
     const update = await this.matchModel.update({ inProgress: false }, { where: { id } });
+    return update;
+  }
+
+  async updateScore(score: IUpdateScore, id: number) {
+    const update = await this.matchModel.update(score, { where: { id } });
     return update;
   }
 }
