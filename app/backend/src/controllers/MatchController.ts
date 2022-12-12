@@ -27,6 +27,25 @@ class MatchController {
       next(error);
     }
   };
+
+  insertMatches = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { homeTeam,
+        awayTeam,
+        homeTeamGoals,
+        awayTeamGoals } = req.body;
+
+      const newMatch = await this.matchService.insertMatch({ homeTeam,
+        awayTeam,
+        homeTeamGoals,
+        awayTeamGoals,
+        inProgress: true,
+      });
+      return res.status(201).json(newMatch);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MatchController;

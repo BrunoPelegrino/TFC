@@ -15,7 +15,7 @@ const authorizationToken: RequestHandler = (req, _res, next) => {
 
     next();
   } catch (err) {
-    throw new ErrorGenerate('Token must be a valid token', 400);
+    throw new ErrorGenerate('Token must be a valid token', 401);
   }
 };
 
