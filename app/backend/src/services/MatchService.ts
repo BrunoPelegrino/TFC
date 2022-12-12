@@ -39,6 +39,11 @@ class MatchService {
       inProgress });
     return addMatch;
   }
+
+  async updateInProgress(id: number) {
+    const update = await this.matchModel.update({ inProgress: false }, { where: { id } });
+    return update;
+  }
 }
 
 export default MatchService;
