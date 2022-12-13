@@ -1,4 +1,4 @@
-import LeaderboardService from '../services/LeaderBoardService';
+import LeaderboardHomeService from '../services/LeaderBoardHomeService';
 import MatchService from '../services/MatchService';
 import TeamService from '../services/TeamService';
 
@@ -7,7 +7,7 @@ async function leaderboardHomeService() {
   const teamsService = new TeamService();
   const allmatch = await matchService.finishedMatches();
   const listTeams = await teamsService.getTeams();
-  const table = new LeaderboardService(listTeams, allmatch);
+  const table = new LeaderboardHomeService(listTeams, allmatch);
 
   const classification = table.classification.sort((b, a) => a.totalPoints - b.totalPoints
     || a.totalVictories - b.totalVictories

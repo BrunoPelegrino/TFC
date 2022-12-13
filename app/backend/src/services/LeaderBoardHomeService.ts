@@ -2,10 +2,10 @@ import { ILeaderBoard, IMatchLeaderBoard } from '../interfaces/LeaderbordInterfa
 import Match from '../database/models/MatchModel';
 import Team from '../database/models/TeamModel';
 
-export default class LeaderboardService {
+export default class LeaderBoardHomeService {
   private leaderBoard: ILeaderBoard[] = [];
   constructor(private allTeams: Team[], private allMatches: Match[]) {
-    this.createTable();
+    this.createHomeTable();
   }
 
   get classification(): ILeaderBoard[] {
@@ -62,34 +62,34 @@ export default class LeaderboardService {
   }
 
   private static goalsDifference(match: IMatchLeaderBoard[]): number {
-    const gd = LeaderboardService.goalsFavor(match) - LeaderboardService.goalsOwn(match);
+    const gd = LeaderBoardHomeService.goalsFavor(match) - LeaderBoardHomeService.goalsOwn(match);
     return gd;
   }
 
   private static efficiency(match: IMatchLeaderBoard[]): number {
     const J = match.length * 3;
-    const P = LeaderboardService.totalPoints(match);
+    const P = LeaderBoardHomeService.totalPoints(match);
     const efficiency: number = (P / J) * 100;
 
     return Number(efficiency.toFixed(2));
   }
 
-  private createTable(): void {
+  private createHomeTable(): void {
     this.allTeams.forEach((team) => {
       const { allMatches } = this;
-      const filteredMatch = allMatches
+      const homeMatch = allMatches
         .filter((m) => m.homeTeam === team.id);
       const name = team.teamName;
       const t = { name,
-        totalPoints: LeaderboardService.totalPoints(filteredMatch),
-        totalGames: filteredMatch.length,
-        totalVictories: LeaderboardService.victories(filteredMatch),
-        totalDraws: LeaderboardService.draws(filteredMatch),
-        totalLosses: LeaderboardService.losses(filteredMatch),
-        goalsFavor: LeaderboardService.goalsFavor(filteredMatch),
-        goalsOwn: LeaderboardService.goalsOwn(filteredMatch),
-        goalsBalance: LeaderboardService.goalsDifference(filteredMatch),
-        efficiency: LeaderboardService.efficiency(filteredMatch) };
+        totalPoints: LeaderBoardHomeService.totalPoints(homeMatch),
+        totalGames: homeMatch.length,
+        totalVictories: LeaderBoardHomeService.victories(homeMatch),
+        totalDraws: LeaderBoardHomeService.draws(homeMatch),
+        totalLosses: LeaderBoardHomeService.losses(homeMatch),
+        goalsFavor: LeaderBoardHomeService.goalsFavor(homeMatch),
+        goalsOwn: LeaderBoardHomeService.goalsOwn(homeMatch),
+        goalsBalance: LeaderBoardHomeService.goalsDifference(homeMatch),
+        efficiency: LeaderBoardHomeService.efficiency(homeMatch) };
       this.leaderBoard.push(t);
     });
   }
