@@ -49,6 +49,17 @@ class MatchService {
     const update = await this.matchModel.update(score, { where: { id } });
     return update;
   }
+
+  async finishedMatches() {
+    const result = await this.matchModel.findAll({
+      where: { inProgress: false },
+      include: [
+        { model: Team, as: 'teamHome', attributes: ['teamName'] },
+        { model: Team, as: 'teamAway', attributes: ['teamName'] },
+      ],
+    });
+    return result;
+  }
 }
 
 export default MatchService;
