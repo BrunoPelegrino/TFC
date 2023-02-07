@@ -1,5 +1,4 @@
 import { RequestHandler } from 'express';
-// import { StatusCodes } from 'http-status-codes';
 import { authToken } from '../auth/newToken';
 import ErrorGenerate from '../utils/errorGenerate';
 
